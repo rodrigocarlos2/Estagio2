@@ -1,5 +1,18 @@
+
+<br>
+
 <h1 class"ui header">Lista de permissões</h1>
-  <table class='ui orange table '>
+
+  <%= search_form_for @q, url: permissions_path do |f| %>
+          <div class="ui icon action input">
+            <i class="search icon"></i>
+            <%= f.search_field :description_cont, placeholder: 'Procurar' do %>
+            <% end %>
+            <%= f.submit 'Procurar', class:'ui blue submit button' %>
+          </div>
+        <% end %>
+
+  <table class='ui blue table '>
   <thead>
     <tr>
       <th>Nome</th>
@@ -21,6 +34,11 @@
   </tbody>
 </table>
 
+<%= will_paginate @permissions, :semantic => true, renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+
+<br>
 <br>
 
-<%= link_to 'Nova permissão', new_permission_path, class: 'ui teal button' %>
+<%= link_to 'Nova permissão', new_permission_path, class: 'ui primary button' %>
+
+<br><br>

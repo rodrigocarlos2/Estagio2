@@ -1,0 +1,28 @@
+<%= form_for(@image_report) do |f| %>
+  <% if @image_report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@image_report.errors.count, "error") %> prohibited this image_report from being saved:</h2>
+
+      <ul>
+      <% @image_report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="four wide field">
+    <%= f.label :avatar %><br>
+    <%= image_tag(@image_report.avatar_url(:thumb)) if @image_report.avatar? %>
+    <%= f.file_field :avatar %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: 'ui teal button'%>
+  </div>
+<% end %>

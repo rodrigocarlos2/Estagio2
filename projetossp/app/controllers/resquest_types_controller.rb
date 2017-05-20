@@ -5,7 +5,8 @@ class ResquestTypesController < ApplicationController
   # GET /resquest_types.json
   def index
     authorize :resquest_type, :index?
-    @resquest_types = ResquestType.all
+    @q = ResquestType.ransack(params[:q])
+    @resquest_types = @q.result
   end
 
   # GET /resquest_types/1

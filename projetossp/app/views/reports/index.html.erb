@@ -1,54 +1,85 @@
 
+<br>
+
 <h1>Listando Perícias</h1>
 
+<br>
+
+  <%= search_form_for @q, url: reports_index_path do |f| %>
+
+          <div class="ui icon action input">
+            <i class="search icon"></i>
+            <%= f.search_field :user_name_cont, placeholder: 'Nome do Perito' do %>
+            <%# Pesquisa que passa pela tabela User para conseguir o nome do Perito %>
+            <% end %>
+            <%= f.submit 'Procurar', class:'ui blue submit button' %>
+          </div>
+
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <%= search_form_for @q, url: reports_index_path do |f| %>
+            <div class="ui icon action input">
+              <i class="search icon"></i>
+              <%= f.search_field :resquest_criminal_person_name_cont, placeholder: 'Nome da Pessoa' do %>
+              <%# Pesquisa que passa pela tabela ResquestCriminal (Person_id) e depois Person (Name) para concluir a pesquisa %>
+              <% end %>
+              <%= f.submit 'Procurar', class:'ui blue submit button' %>
+            </div>
+  <% end %>
+
+  <% end %>
+
 <table class="ui blue table">
+
   <thead>
     <tr>
       <th>Resquisição ID</th>
-      <th>Perito </th>
+      <th>Perícia ID</th>
+      <th>Nome do Perito</th>
+      <th>Nome da Pessoa</th>
+      <th>Órgão Expedidor</th>
+      <th>Órgão Receptor</th>
       <th colspan="4"></th>
     </tr>
   </thead>
 
   <tbody>
+
+    <% @reports2 = Array.new %>
+
     <% @reports.each do |report| %>
+
+      <%# Verificação do Distrito da Perícia e do Usuário (Agente) %>
+      <% if current_user.district_id == report.resquest_criminal.district_send.id %>
+
+        <% @reports2.push(report) %>
+
+      <% end %>
+
+    <% end %>
+
+    <% @reports2.each do |report| %>
+
       <tr>
         <td><%= report.resquest_criminal.id %></td>
+        <td><%= report.id %></td>
         <td><%= report.user.name %></td>
+        <td><%= report.resquest_criminal.person.name  %></td>
+        <td><%= report.resquest_criminal.district_resquest.name %></td>
+        <td><%= report.resquest_criminal.district_send.name %></td>
         <td><%# link_to 'Detalhes', report, class: 'ui tiny blue basic button' %></td>
         <td><%# link_to 'Editar', edit_report_path(report), class: 'ui tiny blue basic button' %></td>
         <td><p><%# link_to 'Ver imagens', images_for_report_index_path(devic: report.id), class: 'ui tiny green basic button' %></p></td>
         <td><%# link_to 'Excluir', report, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui tiny red basic button' %></td>
       </tr>
+
     <% end %>
+
   </tbody>
+
 </table>
 
-<br>
-<table class="ui blue table">
-  <thead>
-    <tr>
-      <th>Pesssoa</th>
-      <th>Agente Emissor </th>
-      <th>Orgão Expedidor</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @resquest_criminals.each do |resquest_criminal| %>
-      <tr>
-        <td><%= resquest_criminal.person.name  %></td>
-        <td><%= resquest_criminal.user.name %></td>
-        <td><%= resquest_criminal.district_resquest.name %></td>
-        <td><%# link_to 'Detalhes', report, class: 'ui tiny blue basic button' %></td>
-        <td><%# link_to 'Editar', edit_report_path(report), class: 'ui tiny blue basic button' %></td>
-        <td><p><%# link_to 'Ver imagens', images_for_report_index_path(devic: report.id), class: 'ui tiny green basic button' %></p></td>
-        <td><%# link_to 'Excluir', report, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui tiny red basic button' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= will_paginate @reports, :semantic => true, renderer: WillPaginateSemanticUi::ActionView::Renderer %>
 
 <br>
 

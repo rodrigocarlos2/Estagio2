@@ -1,0 +1,88 @@
+<div class='ui padded center aligned teal segment show'>
+  <p>
+    <strong>Distrito superior:</strong>
+    <%= @district.district.name unless @district.district.nil? %>
+  </p>
+  
+  <p>
+    <strong>Nome:</strong>
+    <%= @district.name %>
+  </p>
+  
+  <p>
+    <strong>Logradouro:</strong>
+    <%= @district.public_place %>
+  </p>
+  
+  <p>
+    <strong>Cidade:</strong>
+    <%= @district.city %>
+  </p>
+  
+  <p>
+    <strong>Estado:</strong>
+    <%= @district.state %>
+  </p>
+  
+  <p>
+    <strong>Cep:</strong>
+    <%= @district.cep %>
+  </p>
+  
+  <p>
+    <strong>Telefone:</strong>
+    <%= @district.phone %>
+  </p>
+  
+  <p>
+    <strong>Email:</strong>
+    <%= @district.email %>
+  </p>
+  
+  <p>
+    <strong>Bairro:</strong>
+    <%= @district.neighborhood %>
+  </p>
+  
+  <p>
+    <strong>Segundo Telefone:</strong>
+    <%= @district.second_phone %>
+  </p>
+
+  <%= link_to 'Editar', edit_district_path(@district), class: 'ui button' %> 
+  <%= link_to 'Voltar', districts_path, class: 'ui button' %>
+</div>
+
+<div class="ui blue segment">
+  <div class='header'>Subordinado</div>
+  <div class="ui middle aligned divided list">
+      <% @district.fathers_districts.each do |district| %>
+        <div class="item">
+            <div class="right floated content">
+              <%= link_to 'Detalhes', district_path(district), class: "ui button"  %>
+            </div>
+            <div class="content">
+              <%= district.name %>
+            </div>
+        </div>
+      <% end %>
+  </div>
+</div>
+
+<div class="ui orange segment">
+  <div class='header'>
+    <h5>Superior</h5>
+  </div>
+  <div class="ui middle aligned divided list">
+      <% @district.get_ancestors.each do |district| %>
+        <div class="item">
+            <div class="right floated content">
+              <%= link_to 'Detalhes', district_path(district), class: "ui button"  %>
+            </div>
+            <div class="content">
+              <%= district.name %>
+            </div>
+        </div>
+      <% end %>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+
+<div>
+
+  <div>
+
+    <div class="column">
+
+    </div>
+      <br>
+      <p> <%= link_to 'Voltar', reports_path, class: 'ui tiny blue basic button'%> </p>
+      <br>
+      <table class="ui blue table">
+        <tbody>
+          <% count=0 %>
+          <% images = ImageReport.all %>
+          <% images.each do |image| %>
+            <tr>
+              <% if image.report_id == @report_int and count==0 %>
+              	<%= render 'image' %>
+              	<% count=count+1 %>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+        
+        <br>
+        <br>
+        <br>
+    </div>
+  </div>
+</div>

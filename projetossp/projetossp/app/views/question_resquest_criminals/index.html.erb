@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Question Resquest Criminals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Resquest criminal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @question_resquest_criminals.each do |question_resquest_criminal| %>
+      <tr>
+        <td><%= question_resquest_criminal.question %></td>
+        <td><%= question_resquest_criminal.resquest_criminal %></td>
+        <td><%= link_to 'Show', question_resquest_criminal %></td>
+        <td><%= link_to 'Edit', edit_question_resquest_criminal_path(question_resquest_criminal) %></td>
+        <td><%= link_to 'Destroy', question_resquest_criminal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Question resquest criminal', new_question_resquest_criminal_path %>

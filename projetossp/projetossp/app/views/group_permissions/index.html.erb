@@ -1,0 +1,28 @@
+<h1 class"ui header">Lista de permissão de grupo</h1>
+  <table class='ui orange table '>
+  <thead>
+    <tr>
+      <th>Grupo de Usuário</th>
+      <th>Módulo</th>
+      <th>Permissão</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group_permissions.each do |group_permission| %>
+      <tr>
+        <td><%= group_permission.user_group.function %></td>
+        <td><%= group_permission.segment.name %></td>
+        <td><%= group_permission.permission.name %></td>
+        <td><%= link_to 'Detalhes', group_permission, class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Editar', edit_group_permission_path(group_permission), class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Excluir', group_permission, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui tiny red basic button' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Novo grupo de permissão', new_group_permission_path, class: 'ui teal button' %>

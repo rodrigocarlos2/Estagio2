@@ -1,0 +1,1 @@
+json.partial! "resquest_criminals/resquest_criminal", resquest_criminal: @resquest_criminal

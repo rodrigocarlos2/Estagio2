@@ -1,49 +1,30 @@
-<div class='show'>
-  <div class="ui vertical segment">
-    <div class="ui two column grid container">
-      <div class="left aligned column">
-        <div class="ui icon input">
-        
-        <!--<div class="ui left icon action input">-->
-        <!--  <i class="search icon"></i>-->
-        <!--  <input placeholder="Pesquisar" type="text">-->
-        <!--  <div class="ui blue submit button">Procurar</div>-->
-        <!--</div>-->
-        <%= search_form_for @q do |f| %>
-          <div class="ui left icon action input">
+
+<br>
+
+<h1 class"ui header">Lista de Pessoas</h1>
+
+  <%= search_form_for @q do |f| %>
+          <div class="ui icon action input">
             <i class="search icon"></i>
-            <%= f.search_field :name_cont, placeholder: 'Procurar' do %>
+            <%= f.search_field :name_cont, placeholder: 'Nome' do %>
             <% end %>
             <%= f.submit 'Procurar', class:'ui blue submit button' %>
           </div>
-        <% end %>
-      </div>
-        
-        </div>
-      
-      <div class="right aligned column">
-        
-      <%= link_to  new_person_path, class: 'ui teal button' do %>
-          <i class='add icon'></i>Pessoa
-        <% end %>
-      </div>
-    </div>
-  </div>
-  </div>
-  
-  <h1 class="ui header">Lista de pessoas</h1>
-  <table class='ui orange table '>
-    <thead>
-      <tr>
-        <th>Name</th>
+  <% end %>
+
+  <table class='ui blue table '>
+  <thead>
+    <tr>
+        <th>Nome</th>
         <th>Cpf</th>
         <th>Telefone</th>
         <th>Telefone celular</th>
         <th colspan="3"></th>
-      </tr>
-    </thead>
-  
-    <tbody>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
       <% @people.each do |person| %>
         <tr>
           <td>
@@ -51,9 +32,6 @@
               <%= image_tag(person.photo_url(:thumb), class: 'ui rounded image perfil') if person.photo? %>
               <div class="content">
                 <%= person.name %>
-                <div class="sub header">
-                  <%= person.gender %>
-                </div>
               </div>
             </h4>
           </td>
@@ -61,12 +39,31 @@
           <td><%= person.phone %></td>
           <td><%= person.cell_phone %></td>
           <td><%= link_to 'Ver', person, class: 'ui tiny blue basic button' %></td>
-          <td><%= link_to 'Editar', edit_person_path(person), class: 'ui tiny blue basic button' %></td>
+
+          <% if policy(:person).edit? %>
+
+            <td><%= link_to 'Editar', edit_person_path(person), class: 'ui tiny blue basic button' %></td>
+
+          <% end %>
+
+          <% if policy(:person).destroy? %>
+
           <td><%= link_to 'Excluir', person, method: :delete, class: 'ui tiny basic red button', data: { confirm: 'Você tem certeza?' } %></td>
+
+          <% end %>
+
         </tr>
       <% end %>
     </tbody>
   </table>
-  
+
+  <%= will_paginate @people, :semantic => true, renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+
   <br>
-</div>
+  <br>
+
+  <% if policy(:person).create? %>
+
+  <%= link_to 'Nova Pessoa', new_person_path, class: 'ui primary button' %>
+
+  <% end %>

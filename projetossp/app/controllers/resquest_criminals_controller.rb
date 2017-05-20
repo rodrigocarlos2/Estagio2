@@ -5,7 +5,10 @@ class ResquestCriminalsController < ApplicationController
   # GET /resquest_criminals.json
   def index
     authorize :resquest_criminal, :index?
-    @resquest_criminals = ResquestCriminal.all
+    @q = ResquestCriminal.ransack(params[:q])
+    @resquest_criminals = @q.result
+
+    @resquest_criminals = @resquest_criminals.paginate(:page => params[:page], :per_page => 7)
   end
 
   # GET /resquest_criminals/1
@@ -33,6 +36,7 @@ class ResquestCriminalsController < ApplicationController
     @resquest_criminal = ResquestCriminal.new(resquest_criminal_params)
     
     # Nessa linha a requisição atual é setada com o ID do usuário atual
+    
     @resquest_criminal.user_id = current_user.id
     @resquest_criminal.district_resquest = current_user.district
     respond_to do |format|
@@ -85,6 +89,6 @@ class ResquestCriminalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resquest_criminal_params
-      params.require(:resquest_criminal).permit(:district_resquest_id, :district_send_id, :user_id, :resquest_type_id, :person_id)
+      params.require(:resquest_criminal).permit(:district_resquest_id, :district_send_id, :user_id, :resquest_type_id, :person_id, :pdf)
     end
 end

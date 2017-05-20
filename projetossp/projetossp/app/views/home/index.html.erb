@@ -1,0 +1,197 @@
+<%if !user_signed_in? or !current_user.user_group.administrador?%>
+<!-- Page Contents -->
+<div class="pusher">
+  <div class="ui inverted masthead center aligned segment hide-second-bar">
+
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        <%= image_tag 'inverted-logo.svg', class: 'ui centered image' %><br>
+        Bem-vindo ao SRLAR
+      </h1>
+      <h2>Bem vindo ao sistema de registro de ocorrências criminais.</h2>
+    </div>
+    
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="eight wide column">
+          <h3 class="ui header">SRLAR</h3>
+          <p class="justify indent">
+            <% if current_user!=nil %>
+            <%= current_user.user_group_id %>
+            <% end %>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+
+          <h3 class="ui header">O que é o SRLAR?</h3>
+          <p class="justify indent">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+
+          <p class="justify indent">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+        <div class="six wide right floated column">
+          <%= image_tag 'logo.svg', class: 'ui large rounded image' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="six wide centered floated column">
+        <%= image_tag 'digital.svg', class: 'ui rounded image' %>
+      </div>
+
+      <div class="eight wide column">
+        <h3 class="ui header">Identificação de envolvidos em crimes</h3>
+        <p class="justify indent">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<% else  current_user.user_group.administrador? %>
+  <br>
+  <h4 class="ui horizontal divider header">
+      <i class="bar chart icon"></i>
+      Estatísticas
+    </h4>  
+    <div class="ui statistics">
+  <div class="statistic">
+    <div class="value">
+      <i class="user icon"></i> <%= User.count %>
+    </div>
+    <div class="label">
+      Usuários
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      <i class="users icon"></i> <%= Person.count %>
+    </div>
+    <div class="label">
+      Pessoas
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      <i class="edit icon"></i> <%= ResquestCriminal.count %>
+    </div>
+    <div class="label">
+      Requisições
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      <i class="doctor icon"></i> <%= Report.count %>
+    </div>
+    <div class="label">
+      Perícias
+    </div>
+  </div>
+  
+</div>
+  
+  <div class="ui two column relaxed grid">
+  <div class="column">
+  <h4 class="ui horizontal divider header">
+      <i class="list layout icon"></i>
+      Ultimos usuários
+    </h4>  
+     <table class="ui right aligned table">
+      <thead>
+        <th class="left aligned">Nome</th>
+        <th class="left aligned">E-mail</th>
+        <th class="left aligned">Grupo</th>
+        
+      </thead>
+      <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td class="left aligned"><%= user.name%></td>
+          <td class="left aligned"><%= user.email%></td>
+          <td class="left aligned"><%= user.user_group.description %></td>
+          
+        </tr>
+        <% end %>
+      </tbody>
+      </table>
+  </div>
+  <div class="column">
+    <h4 class="ui horizontal divider header">
+      <i class="list layout icon"></i>
+      Ultimas pericias
+    </h4>  
+     <table class="ui right aligned table">
+      <thead>
+        <th class="left aligned">Pessoa</th>
+        <th class="left aligned">Agente Expeditor</th>
+        <th class="left aligned">Orgão Expeditor</th>
+        
+      </thead>
+      <tbody>
+      <% @reports.each do |report| %>
+        <tr>
+          <td class="left aligned"><%= report.user.name%></td>
+          <td class="left aligned"><%= report.resquest_criminal.user.name%></td>
+          <td class="left aligned"><%= report.resquest_criminal.district_send.name%></td>
+        </tr>
+        <% end %>
+      </tbody>
+      </table>
+    
+  </div>
+</div>
+<div class="ui container">
+      <h4 class="ui horizontal divider header">
+      <i class="list layout icon"></i>
+      Ultimas requisições
+    </h4>  
+     <table class="ui right aligned table">
+      <thead>
+        <th class="left aligned">Pessoa</th>
+        <th class="left aligned">Agente Expeditor</th>
+        <th class="left aligned">Orgão Expeditor</th>
+        
+      </thead>
+      <tbody>
+      <% @reports.each do |report| %>
+        <tr>
+          <td class="left aligned"><%= report.user.name%></td>
+          <td class="left aligned"><%= report.resquest_criminal.user.name%></td>
+          <td class="left aligned"><%= report.resquest_criminal.district_send.name%></td>
+        </tr>
+        <% end %>
+      </tbody>
+      </table>
+</div>
+
+<% end %>

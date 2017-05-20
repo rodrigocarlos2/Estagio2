@@ -5,7 +5,10 @@ class DistrictsController < ApplicationController
   # GET /districts.json
   def index
     authorize :district, :index?
-    @districts = District.all
+    @q = District.ransack(params[:q])
+    @districts = @q.result
+
+    @districts = @districts.paginate(:page => params[:page], :per_page => 7)
   end
 
   # GET /districts/1

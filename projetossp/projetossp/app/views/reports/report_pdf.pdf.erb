@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+    <%= wicked_pdf_javascript_include_tag "number_pages" %>
+  </head>
+  <body onload='number_pages'>
+    <div id="header">
+    </div>
+    <h1>FALTANDO DIAGRAMA BASE! </h1>
+    <div class="ui teal segment">
+  <p>
+    <strong>Código Requisição:</strong>
+    <%= @report.resquest_criminal.id %>
+  </p>
+  
+  <p>
+    <strong>Nome do agente emissor</strong>
+    <%= @report.resquest_criminal.user.name %>
+  </p>
+  <p>
+    <strong>Tipo de requisição</strong>
+    <%= @report.resquest_criminal.resquest_type.name %>
+  </p>
+  <p>
+    <strong>Nome do perito</strong>
+    <%= @report.user.name %>
+  </p>
+  <h4 class="ui horizontal divider header">
+    <i class="bar chart icon"></i>
+    Questionário
+  </h4>
+  <% @report.answers.each do |answer| %>
+    <p>
+      <%= answer.question.description %>
+    </p>
+    <p>
+      <%= (answer.description == '') ? 'Sem resposta até o momento' : answer.description %>
+    </p>
+  <% end %>
+  <%# link_to('Editar', edit_resquest_criminal_report_path(@resquest_criminal,@report), class: 'ui tiny blue basic button') if policy(:report).edit? %> 
+  <%# link_to 'Voltar', reports_path, class: 'ui tiny blue basic button' %>
+
+</div>
+  
+  </body>
+</html>

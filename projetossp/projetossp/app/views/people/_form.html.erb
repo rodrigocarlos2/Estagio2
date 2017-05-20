@@ -1,0 +1,66 @@
+<div class="ui form">
+  <h4 class="ui dividing header">Informações</h4>
+  <%= form_for(@person, html: { multipart: true }) do |f| %>
+    <% if @person.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+  
+        <ul>
+        <% @person.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <div class='fields'>
+        <div class='twelve wide field'>
+          <%= f.label :name %><br>
+          <%= f.text_field :name, placeholder: 'Nome completo' %>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <div class='fields'>
+    <div class="four wide field">
+          <%= f.label :photo %><br>
+          <%= image_tag(@person.photo_url(:thumb)) if @person.photo? %>
+          <%= f.file_field :photo %>
+          <%= f.hidden_field :photo_cache %>
+        </div>
+    </div>
+    </div>
+    <div class='field'>
+      <div class='fields'>
+        <div class="four wide field">
+          <%= f.label :rg %><br>
+          <%= f.text_field :rg, placeholder: 'Rg' %>
+        </div>
+        <div class="four wide field">
+          <%= f.label :cpf %><br>
+          <%= f.text_field :cpf, placeholder: 'Cpf' %>
+        </div>
+        <div class="four wide field">
+          <%= f.label :gender %><br>
+          <%= f.select :gender, options_for_select([["Masculino", "1"], ["Feminino", "0"]]),{} , {class: 'ui dropdown'} %>
+        </div>
+      </div>
+    </div>
+    <div class='field'>
+      <div class='fields'>
+        <div class="four wide field">
+          <%= f.label :phone %><br>
+          <%= f.text_field :phone, placeholder: 'Telefone' %>
+        </div>
+        <div class="four wide field">
+          <%= f.label :cell_phone %><br>
+          <%= f.text_field :cell_phone, placeholder: 'Celular' %>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit class:'ui teal button' %>
+    </div>
+  <% end %>
+</div>

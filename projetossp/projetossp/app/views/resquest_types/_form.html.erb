@@ -1,0 +1,28 @@
+<div class="ui form">
+  <h4 class="ui dividing header">Informações</h4>
+  <%= form_for(@resquest_type) do |f| %>
+    <% if @resquest_type.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@resquest_type.errors.count, "error") %> prohibited this resquest_type from being saved:</h2>
+  
+        <ul>
+        <% @resquest_type.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :description %><br>
+      <%= f.text_area :description %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

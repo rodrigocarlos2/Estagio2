@@ -1,0 +1,2 @@
+json.extract! district, :id, :district_id, :name, :public_place, :city, :state, :cep, :phone, :email, :neighborhood, :second_phone, :created_at, :updated_at
+json.url district_url(district, format: :json)

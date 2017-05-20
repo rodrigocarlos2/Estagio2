@@ -1,0 +1,36 @@
+<h1 class"ui header">Lista de orgãos</h1>
+  <table class='ui orange table '>
+    <thead>
+      <tr>
+        <th>Distrito Superior</th>
+        <th>Nome</th>
+        <th>Logradouro</th>
+        <th>Cidade</th>
+        <th>Telefone</th>
+        <th>Email</th>
+        <th>Segundo Telefone</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @districts.each do |district| %>
+        <tr>
+          <td><%= district.district.name unless district.district.nil?  %></td>
+          <td><%= district.name %></td>
+          <td><%= district.public_place %></td>
+          <td><%= district.city %></td>
+          <td><%= district.phone %></td>
+          <td><%= district.email %></td>
+          <td><%= district.second_phone %></td>
+          <td><%= link_to 'Detalhes', district, class: 'ui tiny blue basic button' %></td>
+          <td><%= link_to 'Editar', edit_district_path(district), class: 'ui tiny blue basic button' %></td>
+          <td><%= link_to 'Excluir', district, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui tiny red basic button' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<br>
+
+<%= link_to 'Novo Orgão', new_district_path, class: 'ui teal button' %>

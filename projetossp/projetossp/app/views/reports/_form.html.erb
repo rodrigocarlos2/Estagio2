@@ -1,0 +1,48 @@
+<div class="ui form">
+  <h4 class="ui dividing header">Informações</h4>
+  <%= form_for([@resquest_criminal,@report]) do |f| %>
+    <% if @report.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</h2>
+        <ul>
+          <% @report.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <div class="field">
+    <%# f.label :resquest_criminal_id %><br>
+    <%# f.number_field :resquest_criminal_id %>
+    <%= link_to_add_association('Adicionar imagem', f, :image_reports, 'data-association-insertion-node' => "#list-image ol", 'data-association-insertion-method' => "append", :class => 'ui teal button') %>
+    <fieldset id="list-image">
+      <ol>
+        <%= f.fields_for :image_reports do |image_report| %>
+          <%= render partial: "image_report_fields", locals: {f: image_report} %>
+        <% end %>
+      </ol>
+    </fieldset>
+  </div>
+  <br>
+  <!--<div class="field">
+  <%# f.label :user_id %><br>
+  <%# f.text_field :user_id %>
+  </div> Aqui foi removido, confira o método create do controller reports para acompanhar a solução -->
+  
+  <div class='ui teal segment'>
+    <strong>Requisitor: <%= @report.resquest_criminal.user.name %></strong><br>
+    <strong>Total de perguntas <%= @report.resquest_criminal.questions.count %></strong><br>
+    <%= f.fields_for :answers do |answer| %>
+      <%= answer.label answer.object.question.description %>
+      <%= answer.hidden_field :question_id, value: answer.object.question_id %>
+      <%= answer.text_area :description %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit class:'ui teal button' %>
+  </div>
+  <% end %>
+</div>
+
+
+

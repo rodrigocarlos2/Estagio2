@@ -1,12 +1,16 @@
 <% unless current_user.user_group.delegado? %> 
-  <h1>Listando Perícias</h1>
+  
+  <br>
+
+  <h1> Perícias abertas </h1>
   
   <table class="ui teal table">
+
     <thead>
       <tr>
         <th>Pessoa</th>
         <th>Agente Expedidor </th>
-        <th>Orgão Expedidor</th>
+        <th>Órgão Expedidor</th>
         <th colspan="4"></th>
       </tr>
     </thead>
@@ -17,6 +21,7 @@
           <td><%= resquest_criminal.person.name %></td>
           <td><%= resquest_criminal.user.name %></td>
           <td><%= resquest_criminal.district_resquest.name %></td>
+
           <td><%= link_to 'Escolher para laudo', new_resquest_criminal_report_path(resquest_criminal), class: 'ui tiny positive button' %></td>
           <td><%# link_to 'Editar', edit_report_path(report), class: 'ui tiny blue basic button' %></td>
           <td><p><%# link_to 'Ver imagens', images_for_report_index_path(devic: report.id), class: 'ui tiny green basic button' %></p></td>
@@ -26,7 +31,7 @@
     </tbody>
   </table>
   
-  <h1>Meus laudos</h1>
+  <h1> Meus laudos </h1>
   
   <table class="ui blue table">
     <thead>
@@ -53,14 +58,15 @@
     </tbody>
   </table>
 <% end %>
-<h1>Todos  laudos</h1>
+<h1> Todos laudos </h1>
 
 <table class="ui orange table">
   <thead>
     <tr>
       <th>Pessoa</th>
       <th>Agente Expedidor </th>
-      <th>Orgão Expedidor</th>
+      <th>Órgão Expedidor</th>
+      <th>Órgão Receptor</th>
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -71,9 +77,15 @@
         <td><%= report.resquest_criminal.person.name %></td>
         <td><%= report.resquest_criminal.user.name %></td>
         <td><%= report.resquest_criminal.district_resquest.name %></td>
+        <td><%= report.resquest_criminal.district_send.name %></td>
         <td><%# link_to 'Editar', edit_resquest_criminal_report_path(report.resquest_criminal,report), class: 'ui tiny blue basic button' %></td>
         <td><%= link_to 'Detalhes', resquest_criminal_report_path(report.resquest_criminal,report), class: 'ui tiny blue basic button' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @general_reports, :semantic => true, renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+
+<br>
+<br>

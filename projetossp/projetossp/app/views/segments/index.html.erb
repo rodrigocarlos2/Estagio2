@@ -1,0 +1,26 @@
+<h1 class"ui header">Lista de módulos</h1>
+  <table class='ui orange table '>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @segments.each do |segment| %>
+      <tr>
+        <td><%= segment.name %></td>
+        <td><%= segment.description %></td>
+        <td><%= link_to 'Detalhes', segment, class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Editar', edit_segment_path(segment), class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Excluir', segment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui tiny red basic button' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Novo módulo', new_segment_path, class: 'ui teal button' %>

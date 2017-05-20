@@ -1,0 +1,26 @@
+<h1 class"ui header">Lista de tipo de requisições</h1>
+  <table class='ui orange table '>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @resquest_types.each do |resquest_type| %>
+      <tr>
+        <td><%= resquest_type.name %></td>
+        <td><%= resquest_type.description %></td>
+        <td><%= link_to 'Detalhes', resquest_type, class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Editar', edit_resquest_type_path(resquest_type), class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Excluir', resquest_type, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui tiny red basic button' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Novo Tipo de Requisição', new_resquest_type_path, class: 'ui teal button' %>

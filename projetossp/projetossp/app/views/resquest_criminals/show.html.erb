@@ -1,0 +1,58 @@
+<div class='ui padded center aligned teal  segment show'>
+  <p>
+    <strong>Orgão resquisitor:</strong>
+    <%= @resquest_criminal.district_resquest.name %>
+  </p>
+  
+  <p>
+    <strong>Orgão receptor:</strong>
+    <%= @resquest_criminal.district_send.name %>
+  </p>
+  
+  <p>
+    <strong>Usuário:</strong>
+    <%= @resquest_criminal.user.name %>
+  </p>
+  
+  <p>
+    <strong>Tipo de requisição:</strong>
+    <%= @resquest_criminal.resquest_type.name %>
+  </p>
+  
+  <p>
+    <strong>Pessoa:</strong>
+    <%= @resquest_criminal.person.name %>
+  </p>
+  
+  <%= link_to 'Editar', edit_resquest_criminal_path(@resquest_criminal), class: 'ui button' %> 
+  <%= link_to 'Voltar', resquest_criminals_path, class: 'ui button' %>
+</div>
+
+<div class='ui padded center aligned blue segment show'>
+  <%= link_to 'Adicionar Questionamento', new_resquest_criminal_question_path(@resquest_criminal),class: 'ui positive button'%>
+</div>
+
+<h1 class"ui header">Lista de questões</h1>
+  <table class='ui orange table '>
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Pergunta Padrão</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.description %></td>
+        <td><%= (question.question_default) ? 'Sim': 'Não' %></td>
+        <td><%= link_to 'Detalhes', resquest_criminal_question_path(@resquest_criminal,question), class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Editar', edit_resquest_criminal_question_path(@resquest_criminal,question), class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Excluir', resquest_criminal_question_path(@resquest_criminal,question), method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui tiny red basic button' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

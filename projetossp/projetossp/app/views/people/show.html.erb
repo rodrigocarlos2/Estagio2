@@ -1,0 +1,34 @@
+<div class='ui padded center aligned teal  segment show'>
+  <p>
+    <%= image_tag(@person.photo_url(:pic), class: 'ui centered large image') if @person.photo? %>
+    <h2 class="ui header">
+      <%= @person.name %>
+    </h2>
+    <strong>Gênero</strong>
+    <%= (@person.gender == 0) ? 'Feminino' : 'Masculino' %>
+  </p>
+  
+  <p>
+    <strong>Rg:</strong>
+    <%= @person.rg %>
+  </p>
+  
+  <p>
+    <strong>Cpf:</strong>
+    <%= @person.cpf %>
+  </p>
+  
+  <p>
+    <strong>Telefone:</strong>
+    <%= @person.phone %>
+  </p>
+  
+  <p>
+    <strong>Celular:</strong>
+    <%= @person.cell_phone %>
+  </p>
+  
+  <%= link_to 'Editar', edit_person_path(@person), class: 'ui button' %> 
+  <%= link_to 'Voltar', people_path, class: 'ui button' %>
+  
+</div>

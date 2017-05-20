@@ -1,0 +1,14 @@
+<div class='ui padded center aligned teal  segment show'>
+  <p>
+    <strong>Nome:</strong>
+    <%= @resquest_type.name %>
+  </p>
+  
+  <p>
+    <strong>Descrição:</strong>
+    <%= @resquest_type.description %>
+  </p>
+  
+  <%= link_to 'Editar', edit_resquest_type_path(@resquest_type), class: 'ui button' %> 
+  <%= link_to 'Voltar', resquest_types_path, class: 'ui button' %>
+</div>

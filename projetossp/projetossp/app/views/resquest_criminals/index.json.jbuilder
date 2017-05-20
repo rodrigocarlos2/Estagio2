@@ -1,0 +1,1 @@
+json.array! @resquest_criminals, partial: 'resquest_criminals/resquest_criminal', as: :resquest_criminal

@@ -1,0 +1,25 @@
+<%= form_for(@question_resquest_criminal) do |f| %>
+  <% if @question_resquest_criminal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@question_resquest_criminal.errors.count, "error") %> prohibited this question_resquest_criminal from being saved:</h2>
+
+      <ul>
+      <% @question_resquest_criminal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :question_id %><br>
+    <%= f.text_field :question_id %>
+  </div>
+  <div class="field">
+    <%= f.label :resquest_criminal_id %><br>
+    <%= f.text_field :resquest_criminal_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

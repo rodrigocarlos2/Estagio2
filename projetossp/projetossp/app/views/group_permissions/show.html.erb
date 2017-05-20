@@ -1,0 +1,19 @@
+<div class='ui padded center aligned teal  segment show'>
+ <p>
+    <strong>Grupo de usuário:</strong>
+    <%= @group_permission.user_group.function %>
+  </p>
+  
+  <p>
+    <strong>Módulo:</strong>
+    <%= @group_permission.segment.name %>
+  </p>
+  
+  <p>
+    <strong>Permissão:</strong>
+    <%= @group_permission.permission.name %>
+  </p>
+  
+  <%= link_to 'Editar', edit_group_permission_path(@group_permission), class: 'ui button' %> 
+  <%= link_to 'Voltar', group_permissions_path, class: 'ui button' %>
+</div>

@@ -1,0 +1,78 @@
+<div class='show'>
+  <div class="ui vertical segment">
+    <div class="ui two column grid container">
+      <div class="left aligned column">
+        <div class="ui icon input">
+        
+        <!--<div class="ui left icon action input">-->
+        <!--  <i class="search icon"></i>-->
+        <!--  <input placeholder="Pesquisar" type="text">-->
+        <!--  <div class="ui blue submit button">Procurar</div>-->
+        <!--</div>-->
+        <%= search_form_for @q do |f| %>
+          <div class="ui left icon action input">
+            <i class="search icon"></i>
+            <%= f.search_field :name_cont, placeholder: 'Procurar' do %>
+            <% end %>
+            <%= f.submit 'Procurar', class:'ui blue submit button' %>
+          </div>
+        <% end %>
+      </div>
+        
+        </div>
+      
+      <% if UserGroup.find(current_user.user_group_id).function!='agente' %>
+      <%# Condicional para saber se é diferente de agente, sabe-se que o Agente não pode criar pessoas %>
+
+        <div class="right aligned column">
+          
+          <%= link_to  new_person_path, class: 'ui teal button' do %>
+            <i class='add icon'></i>Pessoa
+          <% end %>
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+  </div>
+  
+  <h1 class="ui header">Lista de pessoas</h1>
+  <table class='ui orange table '>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Cpf</th>
+        <th>Telefone</th>
+        <th>Telefone celular</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @people.each do |person| %>
+        <tr>
+          <td>
+            <h4 class="ui image header">
+              <%= image_tag(person.photo_url(:thumb), class: 'ui rounded image perfil') if person.photo? %>
+              <div class="content">
+                <%= person.name %>
+                <div class="sub header">
+                  <%= person.gender %>
+                </div>
+              </div>
+            </h4>
+          </td>
+          <td><%= person.cpf %></td>
+          <td><%= person.phone %></td>
+          <td><%= person.cell_phone %></td>
+          <td><%= link_to 'Ver', person, class: 'ui tiny blue basic button' %></td>
+          <td><%= link_to 'Editar', edit_person_path(person), class: 'ui tiny blue basic button' %></td>
+          <td><%= link_to 'Excluir', person, method: :delete, class: 'ui tiny basic red button', data: { confirm: 'Você tem certeza?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <br>
+</div>

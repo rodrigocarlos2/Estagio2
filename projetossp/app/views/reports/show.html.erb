@@ -28,7 +28,13 @@
       <%= (answer.description == '') ? 'Sem resposta até o momento' : answer.description %>
     </p>
   <% end %>
-  <%= link_to('Editar', edit_resquest_criminal_report_path(@resquest_criminal,@report), class: 'ui tiny blue basic button') if policy(:report).edit? %> 
+
+  <% if policy(:report).edit? %>
+
+  <%= link_to('Editar', edit_resquest_criminal_report_path(@resquest_criminal,@report), class: 'ui tiny blue basic button') %> 
+
+  <% end %>
+
   <%= link_to 'Voltar', reports_path, class: 'ui tiny blue basic button' %>
 
 </div>

@@ -1,0 +1,14 @@
+<div class='ui padded center aligned teal segment show'>
+  <p>
+    <strong>Nome:</strong>
+    <%= @segment.name %>
+  </p>
+  
+  <p>
+    <strong>Descrição:</strong>
+    <%= @segment.description %>
+  </p>
+  
+  <%= link_to 'Editar', edit_segment_path(@segment), class: 'ui button' %> 
+  <%= link_to 'Voltar', segments_path, class: 'ui button' %>
+</div>

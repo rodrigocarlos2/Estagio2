@@ -1,0 +1,17 @@
+<h1 class"ui header">Lista de usuários</h1>
+<table class='ui orange table'>
+    <thead>
+        <tr>
+            <th>Identificador</th>
+            <th>Opção</th>
+        </tr>
+    </thead>
+    <tbody> 
+        <% @users.each do |user| %>
+        <tr>
+            <td><%= user.email %></td>
+            <td><%= link_to 'Detalhes', show_auditor_path(user.id), class: 'ui basic blue button ' %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

@@ -1,0 +1,26 @@
+<h1 class"ui header">Lista de imagens de laudos</h1>
+  <table class='ui orange table '>
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Laudo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @image_reports.each do |image_report| %>
+      <tr>
+        <td><%= image_report.description %></td>
+        <td><%= image_report.report_id %></td>
+        <td><%= link_to 'Detalhes', image_report, class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Editar', edit_image_report_path(image_report), class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Excluir', image_report, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui tiny red basic button' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nova Imagem de Laudo', new_image_report_path, class: 'ui button' %>

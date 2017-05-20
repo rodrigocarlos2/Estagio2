@@ -1,8 +1,25 @@
+
+<br>
+
 <h1 class"ui header">Lista de usuários</h1>
-<table class='ui orange table'>
+
+<br>
+
+<%= search_form_for @q, url: auditor_index_path do |f| %>
+          <div class="ui icon action input">
+            <i class="search icon"></i>
+            <%= f.search_field :name_cont, placeholder: 'Nome' do %>
+            <%# Pesquisa que passa pela tabela ResquestCriminal (Person_id) e depois Person (Name) para concluir a pesquisa %>
+            <% end %>
+            <%= f.submit 'Procurar', class:'ui blue submit button' %>
+          </div>
+<% end %>
+
+<table class='ui blue table'>
     <thead>
         <tr>
             <th>Identificador</th>
+            <th>Nome</th>
             <th>Opção</th>
         </tr>
     </thead>
@@ -10,8 +27,11 @@
         <% @users.each do |user| %>
         <tr>
             <td><%= user.email %></td>
+            <td><%= user.name %></td>
             <td><%= link_to 'Detalhes', show_auditor_path(user.id), class: 'ui basic blue button ' %></td>
         </tr>
         <% end %>
     </tbody>
 </table>
+
+<%= will_paginate @users, :semantic => true, renderer: WillPaginateSemanticUi::ActionView::Renderer %>

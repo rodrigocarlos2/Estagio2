@@ -1,6 +1,8 @@
 class ResquestCriminal < ActiveRecord::Base
   
   enum status: {aberto: 0, em_andamento:1, finalizado: 2} 
+
+  mount_uploader :pdf, PdfUploader
   
   # Injeção de funções de auditória
   audited

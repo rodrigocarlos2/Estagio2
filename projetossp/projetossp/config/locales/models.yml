@@ -1,0 +1,87 @@
+# encoding: UTF-8
+# pt-BR translations for Devise
+pt-BR:
+    activerecord:
+        models:
+            district: Orgão
+            group_permission: Permissão de grupo
+            image_report: Imagem de laudo
+            image_for_report: Imagem para laudo
+            permission: Permissão
+            person: Pessoa
+            question: Questão
+            question_resquest_criminal: Questão de resquisição
+            report: Laudo
+            resquest_criminal: Resquisição criminal
+            segment: Módulo
+            user: Usuário
+            user_group: Grupo de usuário
+            user_permission: Permissão de grupo
+        attributes:
+            district:
+                name: Nome
+                public_place: Logradouro
+                city: Cidade
+                state: Estado
+                cep: Cep
+                phone: Telefone
+                email: Email
+                neighborhood: Bairro
+                second_phone: Segundo Telefone
+                district_id: Distrito superior
+            group_permission:
+                user_group_id: Grupo de usuário
+                segment_id: Módulo
+                permission_id: Permissão
+            image_report:
+                description: Descrição
+                avatar: Imagem
+            permission:
+                name: Nome
+                description: Descrição
+            person:
+                name: Nome
+                rg: Rg
+                cpf: CPF
+                phone: Telefone
+                cell_phone: Celular
+                gender: Gênero
+                photo: Foto
+            question:
+                resquest_type: Tipo
+                default: Padrão?
+                description: Descrição
+            question_resquest_criminal:
+                resquest_criminal_id: Resquisição
+                question_id: Questão
+            report:
+                resquest_criminal_id: Requisição
+                user_id: Usuário
+            resquest_criminal:
+                district_resquest: Orgão resquisitor
+                district_send: Orgão receptor
+                person_id: Pessoa
+                user_id: Usuário
+                resquest_type: Tipo de resquisição
+            segment:
+                name: Nome
+                description: Descrição
+            user_group:
+                description: Descrição
+                function: Função
+                level: Nível
+            user_permission:
+                user_id: Usuário
+                segment_id: Módulo
+                permission_id: Permissão
+            user:
+                email: Email
+                district_id: Distrito
+                registration: Mátricula
+                date_registration: Data mátricula
+                password: Senha
+                password_confirmation: Confirmação de senha
+                name: Nome
+                current_password: Senha atual
+                user_group_id: Cargo
+                photo: Foto de perfil

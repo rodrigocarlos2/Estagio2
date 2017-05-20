@@ -1,5 +1,16 @@
 <h1 class"ui header">Lista de tipo de requisições</h1>
-  <table class='ui orange table '>
+
+  <%= search_form_for @q do |f| %>
+          <div class="ui icon action input">
+            <i class="search icon"></i>
+            <%= f.search_field :name_cont, placeholder: 'Nome do Perito' do %>
+            <%# Pesquisa que passa pela tabela User para conseguir o nome do Perito %>
+            <% end %>
+            <%= f.submit 'Procurar', class:'ui blue submit button' %>
+          </div>
+  <% end %>
+
+  <table class='ui blue table '>
   <thead>
     <tr>
       <th>Nome</th>
@@ -23,4 +34,4 @@
 
 <br>
 
-<%= link_to 'Novo Tipo de Requisição', new_resquest_type_path, class: 'ui teal button' %>
+<%= link_to 'Novo Tipo de Requisição', new_resquest_type_path, class: 'ui primary button' %>

@@ -1,0 +1,36 @@
+<div class="ui teal segment">
+  <p>
+    <strong>Código Requisição:</strong>
+    <%= @report.resquest_criminal.id %>
+  </p>
+  
+  <p>
+    <strong>Nome do agente emissor</strong>
+    <%= @report.resquest_criminal.user.name %>
+  </p>
+  <p>
+    <strong>Tipo de requisição</strong>
+    <%= @report.resquest_criminal.resquest_type.name %>
+  </p>
+  <p>
+    <strong>Nome do perito</strong>
+    <%= @report.user.name %>
+  </p>
+  <h4 class="ui horizontal divider header">
+    <i class="bar chart icon"></i>
+    Questionário
+  </h4>
+  <% @report.answers.each do |answer| %>
+    <p>
+      <%= answer.question.description %>
+    </p>
+    <p>
+      <%= (answer.description == '') ? 'Sem resposta até o momento' : answer.description %>
+    </p>
+  <% end %>
+  <%= link_to('Editar', edit_resquest_criminal_report_path(@resquest_criminal,@report), class: 'ui tiny blue basic button') if policy(:report).edit? %> 
+  <%= link_to 'Voltar', reports_path, class: 'ui tiny blue basic button' %>
+  <%= link_to 'Finalizar Laudo', resquest_criminal_report_path(@resquest_criminal,@report, finalizar: 'true'), class: 'ui tiny blue basic button' unless @resquest_criminal.finalizado? %>
+  <%= link_to 'Arquivo PDF', "/resquest_criminals/#{@resquest_criminal.id}/reports/#{@report.id}.pdf", class: 'ui tiny blue basic button' if @resquest_criminal.finalizado? %>
+</div>
+  

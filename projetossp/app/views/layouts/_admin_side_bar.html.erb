@@ -25,54 +25,67 @@
     <% end %>
   <% end %>
   
-  <%= link_to reports_path, class: "#{is_current_page?(reports_path)} item" do %>
-  <i class="doctor icon"></i>
-  	Perícia
-  <% end %> 
+  <% if UserGroup.find(current_user.user_group_id).function!='agente' %>
+  <%# Se o grupo de usuario for diferente de agente %>
+      <%= link_to reports_path, class: "#{is_current_page?(reports_path)} item" do %>
+      <i class="doctor icon"></i>
+      	Perícia
+      <% end %>
+
+  <% else %>
+  <%# Está é a visão correta de Agente %>
+      <%= link_to reports_index_path, class: "#{is_current_page?(reports_index_path)} item" do %>
+      <i class="doctor icon"></i>
+        Perícia
+      <% end %>
+
+  <% end %>
   
-  <%= link_to resquest_criminals_path, class: "#{is_current_page?(resquest_criminals_path)} item" do %>
-  <i class="edit icon"></i>
-  	Requisições
+  <% if policy(:resquest_criminal).index? %>
+    <%= link_to resquest_criminals_path, class: "#{is_current_page?(resquest_criminals_path)} item" do %>
+    <i class="edit icon"></i>
+    	Requisições
+    <% end %>
   <% end %>
   
   <% if policy(:district).index? %>
-    <%= link_to districts_path, class: "#{is_current_page?(resquest_criminals_path)} item" do %>
-    <i class="edit icon"></i>
+    <%= link_to districts_path, class: "#{is_current_page?(districts_path)} item" do %>
+    <i class="sitemap icon"></i>
     	Orgão
     <% end %>
   <% end %>
   
   <% if policy(:permission).index? %>
-    <%= link_to permissions_path, class: "#{is_current_page?(resquest_criminals_path)} item" do %>
-    <i class="edit icon"></i>
+    <%= link_to permissions_path, class: "#{is_current_page?(permissions_path)} item" do %>
+    <i class="male icon"></i>
     	Permissão
     <% end %>
   <% end %>
   
   <% if policy(:group_permission).index? %>
-    <%= link_to group_permissions_path, class: "#{is_current_page?(resquest_criminals_path)} item" do %>
-    <i class="edit icon"></i>
+    <%= link_to group_permissions_path, class: "#{is_current_page?(group_permissions_path)} item" do %>
+    <i class="users icon"></i>
     	Permissão de Grupo
     <% end %>
   <% end %>
   
   <% if policy(:user_permission).index? %>
-    <%= link_to user_permissions_path, class: "#{is_current_page?(resquest_criminals_path)} item" do %>
-    <i class="edit icon"></i>
+    <%= link_to user_permissions_path, class: "#{is_current_page?(user_permissions_path)} item" do %>
+    <i class="unhide icon"></i>
     	Permissão de usuário
     <% end %>
   <% end %>
   
   <% if policy(:resquest_type).index? %>
-    <%= link_to resquest_types_path, class: "#{is_current_page?(resquest_criminals_path)} item" do %>
-    <i class="edit icon"></i>
+    <%= link_to resquest_types_path, class: "#{is_current_page?(resquest_types_path)} item" do %>
+    <i class="copy icon"></i>
     	Tipo de laudos
     <% end %>
   <% end %>
   
   <% if policy(:segment).index? %>
-    <%= link_to segments_path, class: "#{is_current_page?(resquest_criminals_path)} item" do %>
-    <i class="edit icon"></i>
+    <%= link_to segments_path, class: "#{is_current_page?(segments_path)} item" do %>
+    <i class="cube icon"></i>
     	Módulo
     <% end %>
   <% end %>

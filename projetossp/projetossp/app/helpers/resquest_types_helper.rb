@@ -1,0 +1,2 @@
+module ResquestTypesHelper
+end

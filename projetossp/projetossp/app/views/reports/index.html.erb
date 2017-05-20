@@ -1,0 +1,65 @@
+
+<h1>Listando Perícias</h1>
+
+<table class="ui blue table">
+  <thead>
+    <tr>
+      <th>Resquisição ID</th>
+      <th>Perícia ID</th>
+      <th>Perito </th>
+      <th>Name Person</th>
+      <th>Disctric Request</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <%= form_tag(reports_index_path, :method => :get) do %>
+
+    <div class="ui left icon action input">
+
+      <i class="search icon"></i>
+
+      <%= text_field_tag 'search', nil, placeholder: 'Nome do Perito' %>
+
+      <%= submit_tag 'Procurar' ,class:'ui blue submit button' %>
+
+    </div>
+
+  <% end %>
+
+  &nbsp;&nbsp;&nbsp;&nbsp;
+
+  <%= form_tag(reports_index_path, :method => :get) do %>
+    
+    <div class="ui left icon action input">
+    
+      <i class="search icon"></i>
+
+      <%= text_field_tag 'search2', nil, placeholder: 'Nome da Pessoa' %>
+
+      <%= submit_tag 'Procurar' ,class:'ui blue submit button' %>
+
+    </div>
+
+  <% end %>
+
+  <tbody>
+    <% @reports.each do |report| %>
+      <tr>
+        <td><%= report.resquest_criminal.id %></td>
+        <td><%= report.id %></td>
+        <td><%= report.user.name %></td>
+        <td><%= report.resquest_criminal.person.name  %></td>
+        <td><%= report.resquest_criminal.district_resquest.name %></td>
+        <td><%# link_to 'Detalhes', report, class: 'ui tiny blue basic button' %></td>
+        <td><%# link_to 'Editar', edit_report_path(report), class: 'ui tiny blue basic button' %></td>
+        <td><p><%# link_to 'Ver imagens', images_for_report_index_path(devic: report.id), class: 'ui tiny green basic button' %></p></td>
+        <td><%# link_to 'Excluir', report, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui tiny red basic button' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%# link_to 'Novo Laudo', new_report_path, class: 'ui teal button' %>

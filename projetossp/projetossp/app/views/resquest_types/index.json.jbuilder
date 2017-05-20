@@ -1,0 +1,1 @@
+json.array! @resquest_types, partial: 'resquest_types/resquest_type', as: :resquest_type

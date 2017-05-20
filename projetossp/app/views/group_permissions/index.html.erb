@@ -1,5 +1,19 @@
+
+<br>
+
 <h1 class"ui header">Lista de permissão de grupo</h1>
-  <table class='ui orange table '>
+
+  <%= search_form_for @q do |f| %>
+          <div class="ui icon action input">
+            <i class="search icon"></i>
+            <%= f.search_field :user_group_description_cont, placeholder: 'Nome do Perito' do %>
+            <%# Pesquisa que passa pela tabela User para conseguir o nome do Perito %>
+            <% end %>
+            <%= f.submit 'Procurar', class:'ui blue submit button' %>
+          </div>
+  <% end %>
+
+  <table class='ui blue table '>
   <thead>
     <tr>
       <th>Grupo de Usuário</th>
@@ -23,6 +37,9 @@
   </tbody>
 </table>
 
+<%= will_paginate @people, :semantic => true, renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+
+<br>
 <br>
 
-<%= link_to 'Novo grupo de permissão', new_group_permission_path, class: 'ui teal button' %>
+<%= link_to 'Novo grupo de permissão', new_group_permission_path, class: 'ui primary button' %>

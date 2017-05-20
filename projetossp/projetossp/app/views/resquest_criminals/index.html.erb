@@ -1,0 +1,32 @@
+<h1 class"ui header">Lista de requisições</h1>
+  <table class='ui orange table '>
+  <thead>
+    <tr>
+      <th>Orgão requisitor</th>
+      <th>Orgão destinátario</th>
+      <th>Agente</th>
+      <th>Tipo</th>
+      <th>Pessoa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @resquest_criminals.each do |resquest_criminal| %>
+      <tr>
+        <td><%= resquest_criminal.district_resquest.name %></td>
+        <td><%= resquest_criminal.district_send.name %></td>
+        <td><%= resquest_criminal.user.name %></td>
+        <td><%= resquest_criminal.resquest_type.name %></td>
+        <td><%= resquest_criminal.person.name %></td>
+        <td><%= link_to 'Detalhes', resquest_criminal, class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Editar', edit_resquest_criminal_path(resquest_criminal), class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Excluir', resquest_criminal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui tiny red basic button' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nova requisição', new_resquest_criminal_path, class: 'ui teal button' %>

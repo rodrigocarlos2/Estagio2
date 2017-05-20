@@ -1,0 +1,38 @@
+<%= form_for(@resquest_criminal) do |f| %>
+  <% if @resquest_criminal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@resquest_criminal.errors.count, "error") %> prohibited this resquest_criminal from being saved:</h2>
+
+      <ul>
+      <% @resquest_criminal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!--<div class="field">-->
+    <%# f.label :district_resquest %><br>
+    <%# f.number_field :district_resquest %>
+  <!--</div>-->
+  <div class="field">
+    <%= f.label :district_send %><br>
+    <%= f.collection_select(:district_send_id, District.all, :id, :name, {}, {:class=>'ui dropdown'}) %>
+  </div>
+  <!--<div class="field">
+    <%# f.label :user_id %><br>
+    <%# f.text_field :user_id %>
+  </div> Esse campo vai ser removido por conta do usuário atual ser o responsável por esse campo. Veja no controller a solução dessa questão-->
+  <div class="field">
+    <%= f.label :resquest_type %><br>
+    <%# f.select(:type, ResquestCriminal.types.keys, {}) %>
+    <%= f.collection_select(:resquest_type_id, ResquestType.all, :id, :name, {:prompt=>false}, {:class=>'ui search dropdown'}) %>
+  </div>
+  <div class="field">
+    <%= f.label :person_id %><br>
+    <%= f.collection_select(:person_id, Person.all, :id, :name, {:prompt=>true}, {:class=>'ui search dropdown'}) %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: 'ui teal button' %>
+  </div>
+<% end %>

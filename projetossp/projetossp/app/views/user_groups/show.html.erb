@@ -1,0 +1,19 @@
+<div class='ui padded center aligned teal segment show'>
+ <p>
+    <strong>Função:</strong>
+    <%= @user_group.function %>
+  </p>
+  
+  <p>
+    <strong>Descrição:</strong>
+    <%= @user_group.description %>
+  </p>
+  
+  <p>
+    <strong>Nível:</strong>
+    <%= @user_group.level %>
+  </p>
+  
+  <%= link_to 'Editar', edit_user_group_path(@user_group), class: 'ui button' %> 
+  <%= link_to 'Voltar', user_groups_path, class: 'ui button' %>
+</div>

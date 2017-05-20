@@ -1,0 +1,14 @@
+<div class='ui padded center aligned teal segment show'>
+  <p>
+    <strong>Nome:</strong>
+    <%= @permission.name %>
+  </p>
+  
+  <p>
+    <strong>Descrição:</strong>
+    <%= @permission.description %>
+  </p>
+  
+  <%= link_to 'Editar', edit_permission_path(@permission), class: 'ui button' %> 
+  <%= link_to 'Voltar', permissions_path, class: 'ui button' %>
+</div>

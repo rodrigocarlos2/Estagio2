@@ -28,7 +28,10 @@
     <%= @person.cell_phone %>
   </p>
   
-  <%= link_to 'Editar', edit_person_path(@person), class: 'ui button' %> 
+  <% if policy(:person).edit? %>
+    <%= link_to 'Editar', edit_person_path(@person), class: 'ui button' %> 
+  <% end %>
+  
   <%= link_to 'Voltar', people_path, class: 'ui button' %>
   
 </div>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @question_resquest_criminal.question %>
+</p>
+
+<p>
+  <strong>Resquest criminal:</strong>
+  <%= @question_resquest_criminal.resquest_criminal %>
+</p>
+
+<%= link_to 'Edit', edit_question_resquest_criminal_path(@question_resquest_criminal) %> |
+<%= link_to 'Back', question_resquest_criminals_path %>

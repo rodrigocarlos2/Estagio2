@@ -1,0 +1,52 @@
+<h1 class"ui header">Lista de modificações</h1>
+<table class='ui orange table'>
+    <thead>
+        <tr>
+            <th>Classe</th>
+            <th>Indentificador</th>
+            <th>Ação</th>
+            <th>Dados</th>
+            <th>Data</th>
+            <th>Endereço</th>
+        </tr>
+    <thead>
+    <tbody>
+        <% @audited.each do |audited_data| %>
+        <tr>
+            <td><%= audited_data.auditable_type %></td>
+            <td><%= audited_data.auditable_id %></td>
+            <td><%= audited_data.action %></td>
+            <td><%= audited_data.audited_changes %></td>
+            <td><%= l(audited_data.created_at) %></td>
+            <td><%= audited_data.remote_address %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<h1 class"ui header">Lista de visualizações</h1>
+<table class='ui orange table'>
+    <thead>
+        <tr>
+            <th>Controlador</th>
+            <th>Ação</th>
+            <th>Link anterior</th>
+            <th>Parâmetros</th>
+            <th>Endereço</th>
+            <th>Identificador de sessão</th>
+        </tr>
+    <thead>
+    <tbody>
+        <% @impressions.each do |impression| %>
+        <tr>
+            <td><%= impression.controller_name %></td>
+            <td><%= impression.action_name %></td>
+            <td><%= impression.referrer %></td>
+            <td><%= impression.params %></td>
+            <td><%= impression.ip_address %></td>
+            <td><%= impression.session_hash %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<%= link_to 'Voltar', auditor_index_path, class: 'ui tiny blue basic button' %>

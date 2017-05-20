@@ -1,5 +1,19 @@
+
+<br>
+
 <h1 class"ui header">Lista de requisições</h1>
-  <table class='ui orange table '>
+
+  <%= search_form_for @q, url: resquest_criminals_path do |f| %>
+          <div class="ui icon action input">
+            <i class="search icon"></i>
+            <%= f.search_field :person_name_cont, placeholder: 'Nome da Pessoa' do %>
+            <%# Pesquisa que passa pela tabela ResquestCriminal (Person_id) e depois Person (Name) para concluir a pesquisa %>
+            <% end %>
+            <%= f.submit 'Procurar', class:'ui blue submit button' %>
+          </div>
+  <% end %>
+
+  <table class='ui blue table '>
   <thead>
     <tr>
       <th>Orgão requisitor</th>
@@ -7,6 +21,7 @@
       <th>Agente</th>
       <th>Tipo</th>
       <th>Pessoa</th>
+      <th>Anexo</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,9 +31,18 @@
       <tr>
         <td><%= resquest_criminal.district_resquest.name %></td>
         <td><%= resquest_criminal.district_send.name %></td>
-        <td><%= resquest_criminal.user.name %></td>
+        <% if resquest_criminal.user!=nil %>
+          <td><%= resquest_criminal.user.name %></td>
+        <% else %>
+          <p> Sem nome </p>
+        <% end %>
         <td><%= resquest_criminal.resquest_type.name %></td>
-        <td><%= resquest_criminal.person.name %></td>
+        <% if resquest_criminal.person!=nil %>
+          <td><%= resquest_criminal.person.name %></td>
+        <% end %>
+        <% url = (resquest_criminal.pdf_url).to_s %>
+        <!-- Quando se colocar o armazenamento de pdf no servidor, tem que se alterar a url_for -->
+        <td> <%= link_to "Ver", url_for("http://localhost:3000#{url}"), :target => '_blank', class: 'ui primary button' %> </td>
         <td><%= link_to 'Detalhes', resquest_criminal, class: 'ui tiny blue basic button' %></td>
         <td><%= link_to 'Editar', edit_resquest_criminal_path(resquest_criminal), class: 'ui tiny blue basic button' %></td>
         <td><%= link_to 'Excluir', resquest_criminal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui tiny red basic button' %></td>
@@ -27,6 +51,11 @@
   </tbody>
 </table>
 
+<%= will_paginate @resquest_criminals, :semantic => true, renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+
+<br>
 <br>
 
-<%= link_to 'Nova requisição', new_resquest_criminal_path, class: 'ui teal button' %>
+<%= link_to 'Nova requisição', new_resquest_criminal_path, class: 'ui primary button' %>
+
+<br><br>

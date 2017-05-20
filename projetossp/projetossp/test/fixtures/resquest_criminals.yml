@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  district_resquest: 1
+  district_send: 1
+  user_id: 
+  type: 1
+  person_id: 
+
+two:
+  district_resquest: 1
+  district_send: 1
+  user_id: 
+  type: 1
+  person_id: 

@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @image_report.description %>
+</p>
+
+<strong> Photo </strong>>
+<%= image_tag(@image_report.avatar_url) if @image_report.avatar? %>
+<br> <br>
+
+<%= link_to 'Edit', edit_image_report_path(@image_report) %> |
+<%= link_to 'Back', image_reports_path %>

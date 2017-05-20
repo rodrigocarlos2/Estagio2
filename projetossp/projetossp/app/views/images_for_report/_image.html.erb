@@ -1,0 +1,36 @@
+
+<div>
+
+	<% count=0 %>
+
+	<% @images.each do |image| %>
+
+	<td>
+
+		<% count=count+1 %>
+
+		<% if image.report_id==@report_int %>
+
+		<p>
+
+			<strong> 
+
+			<%= "#{count}" %> Imagem </strong>
+
+				<p> Description </p>
+				<%= image.description %>
+
+				<br>
+				<%= image_tag(image.avatar_url) if image.avatar? %>
+
+			<br>
+
+		</p>
+
+	</td>
+
+	<% end %>
+
+	<% end %>
+
+</div>

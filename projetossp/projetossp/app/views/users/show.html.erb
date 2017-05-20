@@ -1,0 +1,62 @@
+  <p>
+	<div class="ui items">
+
+	<div class="item">
+
+    <% if @user.photo? %>    
+      <div class="ui small image">
+          <%= image_tag(@user.photo_url) %>
+      </div>
+    <% else %>
+      <div class="ui small image">
+        <img src="/Images/avatar.png">
+      </div>
+    <% end %>
+
+    <div class="content">
+      
+      <div class="header">Nome</div>
+      
+      <div class="meta">
+        <p>
+          <strong>Nome:</strong>
+          <%= @user.name %>
+        </p>
+        <p>
+        	<strong>E-mail:</strong>
+	    		<%= @user.email %>
+        </p>
+        <p>
+          <strong>Cargo:</strong>
+          <%= @user.user_group.description %>
+        </p>
+        <p>
+          <strong>Matricula:</strong>
+          <%= @user.registration %>
+        </p>
+        <p>
+          <strong>Distrito:</strong>
+          <%= @user.district.name %>
+        </p>
+	  	  <p>        	
+			    <strong>Aprovado:</strong>
+			    <% if @user.approved %>
+            Sim
+          <% else %>
+            Não         
+          <% end %>       
+        </p>
+      </div>
+
+      <div class="description">
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+
+
+  </div>
+
+	<%= link_to 'Voltar', users_path,  class: 'ui tiny blue basic button ' %>
+  </p>

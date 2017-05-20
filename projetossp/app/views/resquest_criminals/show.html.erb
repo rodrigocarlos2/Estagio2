@@ -11,7 +11,9 @@
   
   <p>
     <strong>Usuário:</strong>
-    <%= @resquest_criminal.user.name %>
+    <% if @resquest_criminal.user!=nil %>
+      <%= @resquest_criminal.user.name %>
+    <% end %>
   </p>
   
   <p>
@@ -23,6 +25,12 @@
     <strong>Pessoa:</strong>
     <%= @resquest_criminal.person.name %>
   </p>
+
+    <% url = (@resquest_criminal.pdf_url).to_s %>
+    <!-- Quando se colocar o armazenamento de pdf no servidor, tem que se alterar a url_for -->
+    <%= link_to "Ver Anexo", url_for("http://localhost:3000#{url}"), :target => '_blank', class: 'ui second button' %>
+
+    <br><br>
   
   <%= link_to 'Editar', edit_resquest_criminal_path(@resquest_criminal), class: 'ui button' %> 
   <%= link_to 'Voltar', resquest_criminals_path, class: 'ui button' %>

@@ -1,0 +1,19 @@
+<div class='ui padded center aligned teal  segment show'>
+  <p>
+    <strong>Tipo:</strong>
+    <%= @question.resquest_type.name %>
+  </p>
+  
+  <p>
+    <strong>Descrição:</strong>
+    <%= @question.description %>
+  </p>
+  
+  <p>
+    <strong>Padrão:</strong>
+    <%= @question.question_default %>
+  </p>
+  
+  <%= link_to 'Editar', edit_resquest_criminal_question_path(@resquest_criminal,@question), class: 'ui button' %> 
+  <%= link_to 'Voltar', resquest_criminal_path(@resquest_criminal), class: 'ui button' %>
+</div>

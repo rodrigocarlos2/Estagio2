@@ -1,6 +1,12 @@
 
 source 'https://rubygems.org'
 
+gem "will_paginate_semantic_ui"
+
+gem 'semantic-ui-rails'
+
+gem 'bundler', '~> 1.14.2'
+
 gem "mini_magick"
 gem 'rails', '4.2.6'
 gem 'sass-rails', '~> 5.0'

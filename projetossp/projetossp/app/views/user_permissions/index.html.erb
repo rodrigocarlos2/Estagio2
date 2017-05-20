@@ -1,0 +1,28 @@
+<h1 class"ui header">Lista de permissão de usuário</h1>
+  <table class='ui orange table '>
+  <thead>
+    <tr>
+      <th>Usuário</th>
+      <th>Módulo</th>
+      <th>Permissão</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_permissions.each do |user_permission| %>
+      <tr>
+        <td><%= user_permission.user %></td>
+        <td><%= user_permission.segment %></td>
+        <td><%= user_permission.permission %></td>
+        <td><%= link_to 'Detalhes', user_permission, class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Editar', edit_user_permission_path(user_permission), class: 'ui tiny blue basic button' %></td>
+        <td><%= link_to 'Excluir', user_permission, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui tiny red basic button' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nova permissão de usuário', new_user_permission_path, class: 'ui teal button' %>

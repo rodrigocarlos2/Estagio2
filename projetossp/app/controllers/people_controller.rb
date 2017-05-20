@@ -7,8 +7,12 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     authorize :person, :index?
+
     @q = Person.ransack(params[:q])
     @people = @q.result
+
+    @people = @people.paginate(:page => params[:page], :per_page => 7)
+
   end
 
   # GET /people/1

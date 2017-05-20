@@ -1,11 +1,26 @@
 <p id="notice"><%= notice %></p>
 
+<br>
+
 <h1><%= t(".title")%></h1>
 
-<table class="ui orange table">
+<br>
+
+<%= search_form_for @q do |f| %>
+          <div class="ui icon action input">
+            <i class="search icon"></i>
+            <%= f.search_field :name_cont, placeholder: 'Nome' do %>
+            <%# Pesquisa que passa pela tabela User para conseguir o nome do Perito %>
+            <% end %>
+            <%= f.submit 'Procurar', class:'ui blue submit button' %>
+          </div>
+<% end %>
+
+<table class="ui blue table">
   <thead>
     <tr>
       <th>E-mail</th>
+      <th>Nome</th>
       <th>Aprovado</th>
       <th colspan="6"></th>
     </tr>
@@ -16,6 +31,7 @@
       <tr>
         
           <td><%= user.email %></td>
+          <td><%= user.name %></td>
           <% if user.approved %>
           <td>Sim</td>
           <td><%= link_to 'Desaprovar usuário', change_approved_path(user), class: 'ui tiny blue basic button ' %></td>
@@ -31,4 +47,4 @@
   </tbody>
 </table>
 
-<br>
+<br><br>

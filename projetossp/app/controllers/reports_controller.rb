@@ -1,21 +1,29 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy]
-  before_action :set_resquest_criminal, except: :general
+  before_action :set_resquest_criminal, except: [:general, :index]
   
   def general
     authorize :report, :general?
     @resquest_criminals = ResquestCriminal.where(district_send: current_user.district, status: 0)
     @reports = Report.where(user: current_user)
+
     @general_reports = Report.where.not(user: current_user)
+
+    @general_reports = @general_reports.paginate(:page => params[:page], :per_page => 7)
   end
   # GET /reports
   # GET /reports.json
   def index
+
+    # Essa página é exclusiva de agente
+
     authorize :report, :index?
-    @reports = Report.all
+
+    @q = Report.ransack(params[:q])
+    @reports = @q.result
+
+    @reports = @reports.paginate(:page => params[:page], :per_page => 10)
     
-    # status: {aberto: 0, em_andamento:1, finalizado: 2} 
-    @resquest_criminals = ResquestCriminal.where resquest_type: 0, status: 0, district_send: current_user.district
   end
 
   # GET /reports/1
